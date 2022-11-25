@@ -13,6 +13,12 @@ ttest2.m  <- matrix(as.numeric(unlist(ttest2)), byrow=TRUE, nrow=length(ttest2))
 fullgrid.xts <- xts(ttest2.m[,-1], ido)
 rm(list = ls(patt="^tt"))
 
+akt.df  <- data.frame(lon = koord$Lambda, lat = koord$Fi,
+                      val = as.vector(coredata(fullgrid.xts['2001-01-01'])))
+library(raster)
+act <- rasterFromXYZ(akt.df)
+plot(act)
+
 ## Második félbemaradt megoldás
 ttest2 <- scan("racsponti_adatsor_2001tol/fx_grid_20012021.dat", what = character(), skip = 1)
 test.mt <- matrix(ttest2, nrow = 7671)
