@@ -37,3 +37,6 @@ acthoz.full  <-  merge(act.df, acthoz, by = "Index", all.x = TRUE, sort = FALSE)
 acthoz.full.ok <- acthoz.full[order(acthoz.full$cell),]
 full.brick <- brick(nrows=30, ncols=69, xmn=16.05, xmx=22.95, ymn=45.65, ymx=48.65, nl=7670)
 full.brick <- setValues(full.brick, as.matrix(acthoz.full.ok[,-(1:2)]))
+
+library(rts)
+full.rts <- rts(full.brick, ttido)
