@@ -26,3 +26,14 @@ plot(act)
 akt.df  <- data.frame(lon = koord$Lambda, lat = koord$Fi,
                       val = apply(fullgrid.xts['2021'], 2, max))
 plot(rasterFromXYZ(akt.df))
+
+## RasterBrick
+act <- rasterFromXYZ(koord[,c("Lambda", "Fi", "Index")])
+act.df <- as.data.frame(act)
+act.df <- cbind(cell=1:nrow(act.df) ,act.df)
+act.df[is.na(act.df[, "Index"]), "Index"] <- max(act.df[, "Index"], na.rm = TRUE) + 1
+acthoz <- cbind(Index = 1:ncol(ttest2.m), as.data.frame(t(ttest2.m)))
+acthoz.full  <-  merge(act.df, acthoz, by = "Index", all.x = TRUE, sort = FALSE)
+acthoz.full.ok <- acthoz.full[order(acthoz.full$cell),]
+full.brick <- brick(nrows=30, ncols=69, xmn=16.05, xmx=22.95, ymn=45.65, ymx=48.65, nl=7670)
+full.brick <- setValues(full.brick, as.matrix(acthoz.full.ok[,-(1:2)]))
