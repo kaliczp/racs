@@ -21,3 +21,8 @@ akt.df  <- data.frame(lon = koord$Lambda, lat = koord$Fi,
 library(raster)
 act <- rasterFromXYZ(akt.df)
 plot(act)
+
+## Éves maximum
+akt.df  <- data.frame(lon = koord$Lambda, lat = koord$Fi,
+                      val = apply(fullgrid.xts['2021'], 2, max))
+plot(rasterFromXYZ(akt.df))
