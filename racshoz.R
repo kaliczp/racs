@@ -2,6 +2,7 @@ koord <- read.table("racsponti_adatsor_2001tol/gridpoints_coordinates.txt", head
 
 ## fwf beolvasás
 grid2 <- read.fwf("racsponti_adatsor_2001tol/fx_grid_20012021.dat", widths = c(4,2,2,rep(8,1232)), skip = 1)
+as.Date(head(paste(grid2[,1],grid2[,2],grid2[,3], sep = "-")))
 
 ## Gyorsabb megoldás soronkénti feldolgozással
 tttest <- scan("racsponti_adatsor_2001tol/fx_grid_20012021.dat", what = character(), sep = "\n")
