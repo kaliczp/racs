@@ -5,16 +5,16 @@ grid2 <- read.fwf("racsponti_adatsor_2001tol/fx_grid_20012021.dat", widths = c(4
 as.Date(head(paste(grid2[,1],grid2[,2],grid2[,3], sep = "-")))
 
 ## Gyorsabb megoldás soronkénti feldolgozással
-tttest <- scan("racsponti_adatsor_2001tol/fx_grid_20012021.dat", what = character(), sep = "\n")
-ttidohoz <- paste(substr(tttest[-1], 1, 4), substr(tttest[-1], 5, 6), substr(tttest[-1], 7, 8), sep = "-")
+tttest <- scan("racsponti_adatsor_2001tol/fx_grid_20012021.dat", what = character(), sep = "\n", skip = 1)
+ttidohoz <- paste(substr(tttest, 1, 4), substr(tttest, 5, 6), substr(tttest, 7, 8), sep = "-")
 ttidohoz <- gsub(" ", "0", ttidohoz)
-ttido <- as.Date(ttidohoz)
+ido <- as.Date(ttidohoz)
 ttest1 <- substring(tttest[-1], 9)
 ttest2 <- strsplit(ttest1, " +")
 ttest2.m  <- matrix(as.numeric(unlist(ttest2)), byrow=TRUE, nrow=length(ttest2))
 ttest2.m <- ttest2.m[,-1]
 library(xts)
-fullgrid.xts <- xts(ttest2.m, ttido)
+fullgrid.xts <- xts(ttest2.m, ido)
 rm(list = ls(patt="^tt"))
 
 akt.df  <- data.frame(lon = koord$Lambda, lat = koord$Fi,
