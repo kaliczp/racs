@@ -9,7 +9,7 @@ tttest <- scan("racsponti_adatsor_2001tol/fx_grid_20012021.dat", what = characte
 ttidohoz <- paste(substr(tttest, 1, 4), substr(tttest, 5, 6), substr(tttest, 7, 8), sep = "-")
 ttidohoz <- gsub(" ", "0", ttidohoz)
 ido <- as.Date(ttidohoz)
-ttest1 <- substring(tttest[-1], 9)
+ttest1 <- substring(tttest, 9)
 ttest2 <- strsplit(ttest1, " +")
 ttest2.m  <- matrix(as.numeric(unlist(ttest2)), byrow=TRUE, nrow=length(ttest2))
 ttest2.m <- ttest2.m[,-1]
@@ -40,4 +40,4 @@ full.brick <- brick(nrows=30, ncols=69, xmn=16.05, xmx=22.95, ymn=45.65, ymx=48.
 full.brick <- setValues(full.brick, as.matrix(acthoz.full.ok[,-(1:2)]))
 
 library(rts)
-full.rts <- rts(full.brick, ttido)
+full.rts <- rts(full.brick, ido)
