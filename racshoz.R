@@ -41,3 +41,6 @@ full.brick <- setValues(full.brick, as.matrix(acthoz.full.ok[,-(1:2)]))
 
 library(rts)
 full.rts <- rts(full.brick, ido)
+
+## Példa a saját függvény alkalmazására
+ttmp <- metbeolv(file.grid = "racsponti_adatsor_2001tol/fx_grid_20012021.dat", file.coord = "racsponti_adatsor_2001tol/gridpoints_coordinates.txt")
