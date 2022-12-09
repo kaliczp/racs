@@ -44,3 +44,7 @@ full.rts <- rts(full.brick, ido)
 
 ## Példa a saját függvény alkalmazására
 ttmp <- metbeolv(file.grid = "racsponti_adatsor_2001tol/fx_grid_20012021.dat", file.coord = "racsponti_adatsor_2001tol/gridpoints_coordinates.txt")
+## Sugárzás teszt
+sug <- metbeolv(file.grid = "racsponti_adatsor_2001tol/sr_grid_20012021.dat", file.coord = "racsponti_adatsor_2001tol/gridpoints_coordinates.txt")
+## Hőmérs teszt
+hom <- metbeolv(file.grid = "racsponti_adatsor_2001tol/ta_grid_19712021.dat", file.coord = "racsponti_adatsor_2001tol/gridpoints_coordinates.txt")
