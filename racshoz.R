@@ -48,6 +48,8 @@ szel <- metbeolv(file.grid = "racsponti_adatsor_2001tol/fx_grid_20012021.dat", f
 sug <- metbeolv(file.grid = "racsponti_adatsor_2001tol/sr_grid_20012021.dat", file.coord = "racsponti_adatsor_2001tol/gridpoints_coordinates.txt")
 ## Hőmérs teszt
 hom <- metbeolv(file.grid = "racsponti_adatsor_2001tol/ta_grid_19712021.dat", file.coord = "racsponti_adatsor_2001tol/gridpoints_coordinates.txt")
+## Csapi
+csap <- metbeolv(file.grid = "racsponti_adatsor_2001tol/r_grid_19712021", file.coord = "racsponti_adatsor_2001tol/gridpoints_coordinates.txt")
 
 ## Idősor egy cellára kerülő úton
 egycell <- extract(hom@raster, c(18,47))
