@@ -61,6 +61,22 @@ szel.tra <- metbeolv(file.grid = "racsponti_adatsor_2001tol/fx_grid_20012021.dat
 ## Idősor egy cellára kerülő úton
 egycell <- extract(szel.tra, c(18,47))
 cell.xts <- xts(t(as.matrix(egycell[2,])), time(szel.tra))
-cell.df <- cbind(t(egycell[2,]), date = time(szel.tra))
+cell.df <- cbind(as.data.frame(t(egycell[2,])), time(szel.tra))
 names(cell.df) <- c("sz","date")
-plot(sz ~ date, data = cell.df)
+plot(sz ~ date, data = cell.df, type = "l")
+cell.lm <- lm(sz ~ date, data = cell.df)
+
+## Éves gyakoriság 19.4 vagy nagyobb
+ttest <- tapply(cell.df$sz, format(cell.df$date, "%Y"), function(x){dat <- sum(x > 19.4)})
+
+out.mat <- matrix(NA, nrow = 30, ncol = 69)
+evido <-  format(time(szel.tra), "%Y")
+tti <- 1
+for(ttsor in 1:30) {
+  for(ttosz in 1:69) {
+    ttest <- tapply(as.numeric(szel.tra[tti]), evido, function(x){dat <- sum(x > 19.4)})
+    out.mat[ttsor,ttosz] <- sum(ttest[11:21]) - sum(ttest[1:11])
+    tti <- tti + 1
+    print(tti)
+  }
+}
