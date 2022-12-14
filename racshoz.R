@@ -54,3 +54,13 @@ csap <- metbeolv(file.grid = "racsponti_adatsor_2001tol/r_grid_19712021", file.c
 ## Idősor egy cellára kerülő úton
 egycell <- extract(hom@raster, c(18,47))
 cell.xts <- xts(t(as.matrix(egycell[2,])), index(hom@time))
+
+## terra
+szel.tra <- metbeolv(file.grid = "racsponti_adatsor_2001tol/fx_grid_20012021.dat", file.coord = "racsponti_adatsor_2001tol/gridpoints_coordinates.txt", output = "terra")
+
+## Idősor egy cellára kerülő úton
+egycell <- extract(szel.tra, c(18,47))
+cell.xts <- xts(t(as.matrix(egycell[2,])), time(szel.tra))
+cell.df <- cbind(t(egycell[2,]), date = time(szel.tra))
+names(cell.df) <- c("sz","date")
+plot(sz ~ date, data = cell.df)

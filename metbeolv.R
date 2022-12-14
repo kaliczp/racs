@@ -1,4 +1,4 @@
-metbeolv <- function(file.grid, file.coord) {
+metbeolv <- function(file.grid, file.coord, output = "rts") {
   ## Csomagok betöltése
   require(rts)
   require(terra)
@@ -18,6 +18,12 @@ metbeolv <- function(file.grid, file.coord) {
   ttest2.m <- ttest2.m[,-1]
   ## Terra raszter
   full.terra <- rast(cbind(koord[,c("Lambda","Fi")], t(ttest2.m)), type="xyz", crs = "WGS84")
+  if(output == "terra") {
+      result  <- full.terra
+      terra::time(result) <- ido
+  } else {
   ## rts iősor
-  rts(full.terra, ido)
+      result  <- rts(full.terra, ido)
+  }
+  result
 }
