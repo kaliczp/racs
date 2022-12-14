@@ -67,15 +67,20 @@ plot(sz ~ date, data = cell.df, type = "l")
 cell.lm <- lm(sz ~ date, data = cell.df)
 
 ## Éves gyakoriság 19.4 vagy nagyobb
-ttest <- tapply(cell.df$sz, format(cell.df$date, "%Y"), function(x){dat <- sum(x > 19.4)})
+ttest <- tapply(cell.df$sz, format(cell.df$date, "%Y"), function(x){sum(x > 19.4)})
 
 out.mat <- matrix(NA, nrow = 30, ncol = 69)
 evido <-  format(time(szel.tra), "%Y")
 tti <- 1
 for(ttsor in 1:30) {
   for(ttosz in 1:69) {
-    ttest <- tapply(as.numeric(szel.tra[tti]), evido, function(x){dat <- sum(x > 19.4)})
-    out.mat[ttsor,ttosz] <- sum(ttest[11:21]) - sum(ttest[1:11])
+    szelcell <- as.numeric(szel.tra[tti])
+    if(any(is.na(szelcell))) {
+      out.mat[ttsor,ttosz] <- NA
+    } else {
+      ttest <- tapply(szelcell, evido, function(x){sum(x > 19.4)})
+      out.mat[ttsor,ttosz] <- sum(ttest[11:21]) - sum(ttest[1:11])
+    }
     tti <- tti + 1
     print(tti)
   }
